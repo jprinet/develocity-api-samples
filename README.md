@@ -53,7 +53,7 @@ To stop the program, use <kbd>Ctrl</kbd> + <kbd>C</kbd>.
 
 ## Console output sample
 ```
-$ build/install/develocity-api-samples/bin/develocity-api-samples builds --server-url=https://ge.solutions-team.gradle.com --access-key-file=access.key --start-time 2024-06-01T15:00:00 --end-time 2024-06-04T15:00:00 --tags CI,main,Linux
+$ build/install/develocity-api-samples/bin/develocity-api-samples builds --server-url=https://my-develocity-url.com --access-key-file=my-access.key --start-time 2024-06-01T15:00:00 --end-time 2024-06-04T15:00:00 --tags CI,main,Linux
 Processing builds ...
 Query: buildTool:gradle buildStartTime:[2024-06-01T15:00:00 to 2024-06-04T15:00:00] tag:CI tag:main tag:Linux
 ----------------------
