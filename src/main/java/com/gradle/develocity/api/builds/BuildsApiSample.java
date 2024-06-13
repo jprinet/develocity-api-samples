@@ -8,6 +8,9 @@ import picocli.CommandLine.Option;
 
 import java.time.Duration;
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.concurrent.Callable;
 
 @Command(
@@ -28,14 +31,6 @@ public final class BuildsApiSample implements Callable<Integer> {
     GradleEnterpriseApiProvider apiProvider;
 
     @Option(
-        names = "--project-name",
-        description = "The name of the project to show the builds of (if omitted, all builds are shown)",
-        defaultValue = Option.NULL_VALUE,
-        order = 2
-    )
-    String projectName;
-
-    @Option(
         names = "--reverse",
         description = "A boolean indicating the time direction of the query. A value of true indicates a backward query, and returned builds will be sorted from most to least recent. A value of false indicates a forward query, and returned builds will be sorted from least to most recent (default: ${DEFAULT-VALUE}).",
         defaultValue = "false",
@@ -52,23 +47,45 @@ public final class BuildsApiSample implements Callable<Integer> {
     int maxBuilds;
 
     @Option(
+            names = "--start-time",
+            description = "Start time to collect builds from. The time should be in the format of 'yyyy-MM-ddThh:mm:ss'",
+            defaultValue = "2024-06-01T00:00:00",
+            order = 5
+    )
+    String startTime;
+
+    @Option(
+            names = "--end-time",
+            description = "End time to collect builds to. The time should be in the format of 'yyyy-MM-ddThh:mm:ss'",
+            defaultValue = "2024-06-03T23:59:59",
+            order = 6
+    )
+    String endTime;
+
+    @Option(
+            names = "--tags",
+            description = "Build tags",
+            defaultValue = "CI",
+            order = 7
+    )
+    String tags;
+
+    @Option(
         names = "--max-wait-secs",
         description = "The maximum number of seconds to wait until a query returns. If the query returns before --max-builds is reached, it returns with already processed builds (default: ${DEFAULT-VALUE})",
         defaultValue = "3",
-        order = 5
+        order = 8
     )
     int maxWaitSecs;
 
     @Override
     public Integer call() throws Exception {
         GradleEnterpriseApi api = apiProvider.create();
-        BuildProcessor buildProcessor = new BuildCacheBuildProcessor(api, projectName);
-        BuildsProcessor buildsProcessor = new BuildsProcessor(api, buildProcessor, reverse, maxBuilds, maxWaitSecs);
+        GradleBuildProcessor gradleBuildProcessor = new GradleBuildProcessor(api);
+        BuildsProcessor buildsProcessor = new BuildsProcessor(api, gradleBuildProcessor, startTime, endTime, Arrays.asList(tags.split(",")));
 
         System.out.println("Processing builds ...");
-
-        Instant startProcessingTime = reverse ? Instant.now() : Instant.now().minus(Duration.ofMinutes(15));
-        buildsProcessor.process(startProcessingTime);
+        buildsProcessor.process();
 
         return 0;
     }

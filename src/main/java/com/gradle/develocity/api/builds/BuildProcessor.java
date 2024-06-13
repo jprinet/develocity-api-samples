@@ -4,6 +4,6 @@ import com.gradle.enterprise.api.model.Build;
 
 interface BuildProcessor {
 
-    void process(Build build);
+    void process(Build build, BuildsMetrics buildsMetrics);
 
 }
