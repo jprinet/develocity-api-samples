@@ -12,13 +12,15 @@ final class BuildsProcessor {
 
     private final GradleEnterpriseApi api;
     private final BuildProcessor buildProcessor;
+    private final int maxBuilds;
     private final String startTime;
     private final String endTime;
     private final List<String> tags;
 
-    BuildsProcessor(GradleEnterpriseApi api, BuildProcessor buildProcessor, String startTime, String endTime, List<String> tags) {
+    BuildsProcessor(GradleEnterpriseApi api, BuildProcessor buildProcessor, int maxBuilds, String startTime, String endTime, List<String> tags) {
         this.api = api;
         this.buildProcessor = buildProcessor;
+        this.maxBuilds = maxBuilds;
         this.startTime = startTime;
         this.endTime = endTime;
         this.tags = tags;
@@ -34,6 +36,7 @@ final class BuildsProcessor {
         BuildsQuery buildsQuery = new BuildsQuery();
         buildsQuery.setFromInstant(0L);
         buildsQuery.setQuery(query);
+        buildsQuery.setMaxBuilds(maxBuilds);
         buildsQuery.setModels(Collections.singletonList(BuildModelName.GRADLE_ATTRIBUTES));
 
         List<Build> builds = api.getBuilds(buildsQuery);

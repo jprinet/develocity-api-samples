@@ -41,7 +41,7 @@ public final class BuildsApiSample implements Callable<Integer> {
     @Option(
         names = "--max-builds",
         description = "The maximum number of builds to return by a single query. The number may be lower if --max-wait-secs is reached (default: ${DEFAULT-VALUE})",
-        defaultValue = "100",
+        defaultValue = "1000",
         order = 4
     )
     int maxBuilds;
@@ -82,7 +82,7 @@ public final class BuildsApiSample implements Callable<Integer> {
     public Integer call() throws Exception {
         GradleEnterpriseApi api = apiProvider.create();
         GradleBuildProcessor gradleBuildProcessor = new GradleBuildProcessor(api);
-        BuildsProcessor buildsProcessor = new BuildsProcessor(api, gradleBuildProcessor, startTime, endTime, Arrays.asList(tags.split(",")));
+        BuildsProcessor buildsProcessor = new BuildsProcessor(api, gradleBuildProcessor, maxBuilds, startTime, endTime, Arrays.asList(tags.split(",")));
 
         System.out.println("Processing builds ...");
         buildsProcessor.process();
