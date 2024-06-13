@@ -51,6 +51,26 @@ $ build/install/develocity-api-samples/bin/develocity-api-samples builds --serve
 
 To stop the program, use <kbd>Ctrl</kbd> + <kbd>C</kbd>.
 
+## Console output sample
+```
+$ build/install/develocity-api-samples/bin/develocity-api-samples builds --server-url=https://ge.solutions-team.gradle.com --access-key-file=access.key --start-time 2024-06-01T15:00:00 --end-time 2024-06-04T15:00:00 --tags CI,main,Linux
+Processing builds ...
+Query: buildTool:gradle buildStartTime:[2024-06-01T15:00:00 to 2024-06-04T15:00:00] tag:CI tag:main tag:Linux
+----------------------
+k7dnvpf6yrxjq
+PT7M59.507S
+----------------------
+...
+----------------------
+2n6ifcg67el3m
+PT9M46.022S
+----------------------
+----------------------
+Builds processed: 316
+Overall build duration: PT20H57M35.557S
+Average build duration: PT3M58.783S
+```
+
 ## Further documentation
 
 The Develocity API manual and reference documentation for each version of the API can be found [here](https://docs.gradle.com/enterprise/api-manual).
