@@ -2,9 +2,7 @@
 
 This repository demonstrates using the Develocity API and generating client code from its OpenAPI specification.
 
-The sample contains two scenarios:
-* The `builds` scenario which collects average build duration by startTime, endTime and tags.
-* The `tests` scenario determines previously stable test classes that have recently become unstable, and creates a report pointing to example builds published to the given Develocity instance.
+The project collects average build duration by startTime, endTime and a list of tags.
 
 ## How to build
 
@@ -24,6 +22,8 @@ Therefore, the generated client is still compatible with Java 8 based projects.
 
 ## How to run
 
+### Access Key
+
 A Develocity access key with the “Export build data via the API” permission is required.
 
 To create an access key:
@@ -35,7 +35,7 @@ To create an access key:
 
 The access key should be saved to a file, which will be supplied as a parameter to the program.
 
-### Builds API sample
+### Run
 
 After provisioning the access key, execute:
 

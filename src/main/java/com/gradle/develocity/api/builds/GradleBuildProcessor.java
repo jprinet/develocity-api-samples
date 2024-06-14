@@ -6,7 +6,7 @@ import com.gradle.enterprise.api.model.*;
 
 import java.time.Duration;
 
-final class GradleBuildProcessor implements BuildProcessor {
+final class GradleBuildProcessor {
 
     private final GradleEnterpriseApi api;
 
@@ -14,8 +14,7 @@ final class GradleBuildProcessor implements BuildProcessor {
         this.api = api;
     }
 
-    @Override
-    public void process(Build build, BuildsMetrics buildsMetrics) {
+    void process(Build build, BuildsMetrics buildsMetrics) {
         try {
             processGradleBuildWithGradleAttributesModel(build, buildsMetrics);
         } catch (ApiException e) {
@@ -31,7 +30,7 @@ final class GradleBuildProcessor implements BuildProcessor {
     }
 
     // The duration of the build, as milliseconds since Epoch.
-    private static Long getBuildDurationMs(Build build) {
+    private Long getBuildDurationMs(Build build) {
         if(null != build.getModels() && null != build.getModels().getGradleAttributes() && null != build.getModels().getGradleAttributes().getModel()) {
             return build.getModels().getGradleAttributes().getModel().getBuildDuration();
         } else {
@@ -42,8 +41,7 @@ final class GradleBuildProcessor implements BuildProcessor {
     private void reportBuild(Build build, long buildDurationMs) {
         System.out.println("----------------------");
         System.out.println(build.getId());
-        Duration duration = Duration.ofMillis(buildDurationMs);
-        System.out.println(duration.toString());
+        System.out.println(Duration.ofMillis(buildDurationMs));
     }
 
     private void reportError(Build build, ApiException e) {

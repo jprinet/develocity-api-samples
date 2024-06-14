@@ -3,21 +3,21 @@ package com.gradle.develocity.api.builds;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 
-public class BuildsMetrics {
+final class BuildsMetrics {
 
     private final AtomicInteger buildCount = new AtomicInteger(0);
-    private final AtomicLong buildOverallDurationMs = new AtomicLong(0);
+    private final AtomicLong buildOverallDurationInMs = new AtomicLong(0);
 
-    public void addBuild(long buildDurationMs) {
+    public void addBuild(long buildDurationInMs) {
         buildCount.incrementAndGet();
-        buildOverallDurationMs.addAndGet(buildDurationMs);
+        buildOverallDurationInMs.addAndGet(buildDurationInMs);
     }
 
     public int getBuildCount() {
         return buildCount.get();
     }
 
-    public long getBuildOverallDuration() {
-        return buildOverallDurationMs.get();
+    public long getBuildOverallDurationInMs() {
+        return buildOverallDurationInMs.get();
     }
 }
