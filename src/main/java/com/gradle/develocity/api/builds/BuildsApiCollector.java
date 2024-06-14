@@ -27,14 +27,6 @@ public final class BuildsApiCollector implements Callable<Integer> {
     GradleEnterpriseApiProvider apiProvider;
 
     @Option(
-        names = "--reverse",
-        description = "A boolean indicating the time direction of the query. A value of true indicates a backward query, and returned builds will be sorted from most to least recent. A value of false indicates a forward query, and returned builds will be sorted from least to most recent (default: ${DEFAULT-VALUE}).",
-        defaultValue = "false",
-        order = 3
-    )
-    boolean reverse;
-
-    @Option(
         names = "--max-builds",
         description = "The maximum number of builds to return by a single query. The number may be lower if --max-wait-secs is reached (default: ${DEFAULT-VALUE})",
         defaultValue = "1000",

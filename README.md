@@ -48,6 +48,7 @@ $ build/install/develocity-api-samples/bin/develocity-api-samples builds --serve
 - `--start-time`: The start time of the period to collect data for (ISO 8601 format)
 - `--end-time`: The end time of the period to collect data for (ISO 8601 format)
 - `--tags`: A comma-separated list of tags to filter builds by
+- `--max-builds`: To cap the number of builds to process
 
 To stop the program, use <kbd>Ctrl</kbd> + <kbd>C</kbd>.
 
