@@ -1,6 +1,6 @@
 package com.gradle.develocity.api;
 
-import com.gradle.develocity.api.builds.BuildsApiSample;
+import com.gradle.develocity.api.builds.BuildsApiCollector;
 import picocli.CommandLine;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.HelpCommand;
@@ -16,13 +16,13 @@ import picocli.CommandLine.HelpCommand;
     synopsisSubcommandLabel = "COMMAND",
     usageHelpAutoWidth = true,
     usageHelpWidth = 120,
-    subcommands = {BuildsApiSample.class, HelpCommand.class}
+    subcommands = {BuildsApiCollector.class, HelpCommand.class}
 )
-public final class SampleMain {
+public final class Main {
 
     public static void main(final String[] args) {
         //noinspection InstantiationOfUtilityClass
-        System.exit(new CommandLine(new SampleMain()).execute(args));
+        System.exit(new CommandLine(new Main()).execute(args));
     }
 
 }

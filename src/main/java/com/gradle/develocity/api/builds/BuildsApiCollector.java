@@ -6,16 +6,12 @@ import picocli.CommandLine.Command;
 import picocli.CommandLine.Mixin;
 import picocli.CommandLine.Option;
 
-import java.time.Duration;
-import java.time.Instant;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.concurrent.Callable;
 
 @Command(
     name = "builds",
-    description = "A sample program that demonstrates using the Develocity API to extract build data about build cache performance",
+    description = "A program using the Develocity API to extract build data",
     synopsisHeading = "%n@|bold Usage:|@ ",
     optionListHeading = "%n@|bold Options:|@%n",
     commandListHeading = "%n@|bold Commands:|@%n",
@@ -25,7 +21,7 @@ import java.util.concurrent.Callable;
     usageHelpAutoWidth = true,
     usageHelpWidth = 120
 )
-public final class BuildsApiSample implements Callable<Integer> {
+public final class BuildsApiCollector implements Callable<Integer> {
 
     @Mixin
     GradleEnterpriseApiProvider apiProvider;
@@ -81,7 +77,7 @@ public final class BuildsApiSample implements Callable<Integer> {
     @Override
     public Integer call() throws Exception {
         GradleEnterpriseApi api = apiProvider.create();
-        GradleBuildProcessor gradleBuildProcessor = new GradleBuildProcessor(api);
+        BuildProcessor gradleBuildProcessor = new BuildProcessor(api);
         BuildsProcessor buildsProcessor = new BuildsProcessor(api, gradleBuildProcessor, maxBuilds, startTime, endTime, Arrays.asList(tags.split(",")));
 
         System.out.println("Processing builds ...");

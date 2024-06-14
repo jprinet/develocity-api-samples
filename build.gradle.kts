@@ -13,7 +13,7 @@ repositories {
 }
 
 application {
-    mainClass.set("com.gradle.develocity.api.SampleMain")
+    mainClass.set("com.gradle.develocity.api.Main")
 }
 
 java {
